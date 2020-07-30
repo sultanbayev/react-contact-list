@@ -16,6 +16,21 @@ const ContactList = ({ onAddNewClick }) => {
       dataIndex: "phone",
       key: "phone",
     },
+    {
+      title: "Birthday",
+      dataIndex: "birthday",
+      key: "birthday",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      key: "gender",
+    },
+    {
+      title: "Emergency Contact",
+      dataIndex: "isEmergency",
+      key: "isEmergency",
+    },
   ];
 
   return (
@@ -26,7 +41,7 @@ const ContactList = ({ onAddNewClick }) => {
         </Button>
       </Space>
       <Divider />
-      <Table dataSource={contacts} columns={columns} />
+      <Table dataSource={contacts} columns={columns} rowKey="phone" />
     </>
   );
 };

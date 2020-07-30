@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import "antd/dist/antd.css";
 import MainPage from "./Main/MainPage";
+import { message } from "antd";
 import Context from "./Main/Context";
 
 function App() {
@@ -11,7 +12,15 @@ function App() {
     setContacts(contacts.concat(contact));
   };
 
-  const contextValue = { contacts, addNewContact };
+  const onSuccess = (successMessage) => {
+    message.success(successMessage);
+  };
+
+  const onError = (errorMessage) => {
+    message.error(errorMessage);
+  }
+
+  const contextValue = { contacts, addNewContact, onSuccess, onError };
 
   return (
     <Context.Provider value={contextValue}>
