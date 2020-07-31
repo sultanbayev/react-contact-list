@@ -6,9 +6,12 @@ import { message } from "antd";
 import Context from "./Main/Context";
 
 function App() {
-  const [contacts, setContacts] = React.useState([]);
+  const [contacts, setContacts] = React.useState([
+
+  ]);
 
   const addNewContact = (contact) => {
+    // console.log(contact)
     setContacts(contacts.concat(contact));
   };
 

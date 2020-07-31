@@ -56,18 +56,6 @@ function CreateContact({ onCancelClick, onSuccessCreate }) {
         <Input />
       </Form.Item>
       <Form.Item
-        name="birthday"
-        label="Birthday"
-        rules={[
-          {
-            required: true,
-            message: "Please select the day of your birthday",
-          },
-        ]}
-      >
-        <DatePicker />
-      </Form.Item>
-      <Form.Item
         name="gender"
         label="Gender"
         rules={[
@@ -81,6 +69,12 @@ function CreateContact({ onCancelClick, onSuccessCreate }) {
           <Select.Option value="female">Female</Select.Option>
           <Select.Option value="male">Male</Select.Option>
         </Select>
+      </Form.Item>
+      <Form.Item
+        name="birthday"
+        label="Birthday"
+      >
+        <DatePicker />
       </Form.Item>
       <Form.Item
         name="isEmergency"
