@@ -1,11 +1,16 @@
 import React from "react";
 import { Form, Input, Button, Space, DatePicker, Select, Switch } from "antd";
+import moment from 'moment';
 import Context from "./Context";
 
-function CreateContact({ onCancelClick }) {
+function UpdateContact({ onCancelClick, contactToEdit }) {
 
   const [form] = Form.useForm();
-  const { addContact, onSuccess } = React.useContext(Context);
+  const {
+    updateContact,
+    onSuccess,
+    // onError,
+  } = React.useContext(Context);
 
   const onFormFinish = (fieldsValue) => {
     const values = {
@@ -15,8 +20,8 @@ function CreateContact({ onCancelClick }) {
       gender: fieldsValue.gender === 'male' ? 'Male' : 'Female',
       isEmergency: fieldsValue.isEmergency === true ? 'Yes' : 'No',
     }
-    addContact(values);
-    onSuccess('Contact was created');
+    updateContact(contactToEdit.key, values);
+    onSuccess('Contact has been updated');
     onCancelClick();
   };
 
@@ -25,6 +30,7 @@ function CreateContact({ onCancelClick }) {
       <Form.Item
         name="name"
         label="Name"
+        initialValue={ contactToEdit && contactToEdit.name}
         rules={[
           {
             required: true,
@@ -37,6 +43,7 @@ function CreateContact({ onCancelClick }) {
       <Form.Item
         name="phone"
         label="Phone Number"
+        initialValue={ contactToEdit && contactToEdit.phone}
         rules={[
           {
             required: true,
@@ -49,6 +56,7 @@ function CreateContact({ onCancelClick }) {
       <Form.Item
         name="gender"
         label="Gender"
+        initialValue={ contactToEdit && contactToEdit.gender}
         rules={[
           {
             required: true,
@@ -64,6 +72,7 @@ function CreateContact({ onCancelClick }) {
       <Form.Item
         name="birthday"
         label="Birthday"
+        initialValue={moment(contactToEdit.birthday, 'YYYY-MM-DD')}
       >
         <DatePicker />
       </Form.Item>
@@ -72,12 +81,12 @@ function CreateContact({ onCancelClick }) {
         label="Emergency Contact"
         valuePropName="checked"
       >
-        <Switch />
+        <Switch defaultChecked={contactToEdit.isEmergency === 'Yes' ? true : false}/>
       </Form.Item>
       <Form.Item>
         <Space>
           <Button type="primary" htmlType="submit">
-            Add Contact
+            Update Contact
           </Button>
           <Button type="primary" danger onClick={onCancelClick}>
             Cancel
@@ -88,4 +97,4 @@ function CreateContact({ onCancelClick }) {
   );
 };
 
-export default CreateContact;
+export default UpdateContact;
